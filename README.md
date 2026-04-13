@@ -10,7 +10,7 @@ Due to company intellectual property and confidentiality requirements, we are un
 
 ## 💡 Approximation Ratio Proof for the Conflict-Resolution Algorithm
 
-### 1.Problem Definition
+### 1. Problem Definition
 We consider the **3D indoor multilayer spatial task assignment (3DIMSTA)** problem, defined as follows:
 
 *Definition 1 (Node):*
@@ -35,8 +35,23 @@ The task completion time that a robot $r$ executes a task $t$ is defined as $C(r
 Given a map $M$, a set of robots $R$ and a set of micro-tasks $T$ on a spatial crowdsourcing platform, which has no task initially and allows that tasks can arrive in batches within a fixed time window, the **3DIMSTA** problem is to find an assignment schema $A \subseteq R \times T$ among robots and tasks to minimize the total completion time
 $$MinSum(A) = \min \sum_{(r, t) \in A} C(r, t)$$
 of all tasks in the batch, such that the following constraints are satisfied:
-
 - **Task Arrival Constraint**: Upon posting, a task is either assigned to a compatible-type robot immediately, or deferred to the next batch window.
 - **One-to-One Matching Constraint**: Tasks and robots are matched 1 to 1, until all tasks are assigned or all available robots are busy.
 - **Invariability Constraint**: The assignment pair $(r,t)$ is fixed once task $t$ is assigned to robot $r$.
 - **Path Conflict Constraint**: Robot paths are conflict-free, meaning that elevator contention should be resolved by selecting users, with others waiting or rerouting.
+
+### 2. Approximation Ratio Proof
+
+#### 2.1 Algorithm Recap
+
+Our proposed **greedy conflict-resolution algorithm** follows the core principle of **minimizing path replacement cost** (incremental time cost), designed to resolve spatio-temporal elevator conflicts in 3D indoor multilayer scenarios. The algorithm flow is as follows:
+
+**Input**: Initial task assignment $A_{ini}$.
+1.  **Conflict Detection**: Check the initial assignment $A_{ini}$, traverse all time windows, and locate all sets of robots with elevator conflicts and their corresponding time windows $C$.
+2.  **Greedy Resolution**: Let $A \leftarrow A_{ini}$. If $C = \emptyset$, proceed to step (4); otherwise, for each conflict $c_k \in C$:
+    - Traverse the time window corresponding to conflict $c_k$, and obtain the set of conflicting robots $R_k$ in this window.
+    - For each robot $r_i \in R_k$, calculate the **time cost increment $\Delta \tau_i$** when updating its original assignment $A_{i_{old}}$ to the new assignment $A_{i_{new}}$ (including the original task, new execution route, new time consumption, etc.) to avoid conflicts (waiting for elevator availability or switching to a suboptimal path).
+    - Select the robot $r_{select}$ with the **maximum cost increment** (i.e., $\Delta \tau_{select} = \max_{r_i \in R_k} \{\Delta \tau_i\}$) and retain its original assignment; update the assignments of the remaining robots: $A \leftarrow A - A_{i_{old}}, A \leftarrow A \cup A_{i_{new}}$.
+3.  **Iterative Loop**: Return to step (1), repeat conflict detection and resolution until no conflicts exist.
+4.  **Output Result**: Let $A_{final} \leftarrow A$, output the final conflict-free task assignment scheme.
+
