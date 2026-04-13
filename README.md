@@ -96,13 +96,16 @@ To avoid symbol conflicts, the following parameters are uniformly defined:
      - runtime: 1.75 $\text{s/floor}$
      - move n_i layers: 4.5 + 1.75$n_i$
    
-   $\alpha_i = 7n_i$
+   Thus:
    
-   $\beta_i = 4.5 + 1.75n_i$
+$$\alpha_i = 7n_i$$
+  
+$$\beta_i = 4.5 + 1.75n_i$$
 
-   $D = \frac{d}{1.5}$
+$$D = \frac{d}{1.5}$$
 
-   $$m = \frac{7n_i}{4.5 + 1.75n_i} = \frac{28n_i}{18 + 7n_i} < 4$$
+$$m = \frac{7n_i}{4.5 + 1.75n_i} = \frac{28n_i}{18 + 7n_i} < 4$$
+   
 5. According to fire safety and evacuation regulations [1,2], the horizontal distance between elevator and staircase satisfies $d < 25$.
 
 #### 2.3 Approximation Ratio Analysis
