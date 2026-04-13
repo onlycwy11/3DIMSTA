@@ -198,7 +198,7 @@ $$\frac{4D + 28n_i}{18 + 7n_i} < 4$$
 
 By Theorem 1:
 
-$$\frac{\sum (d + \alpha_i)}{\sum \beta_i} < 4$$
+$$\frac{\sum (D + \alpha_i)}{\sum \beta_i} < 4$$
 
 In all three scenarios:
 
