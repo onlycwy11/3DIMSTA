@@ -192,7 +192,7 @@ $$\frac{\sum (-D + \alpha_i)}{\sum \beta_i} < 4$$
 
 $$\frac{4D + 28n_i}{18 + 7n_i} = 4 + \frac{4D - 72}{18 + 7n_i}$$
 
-Since $d \le 25$, we have $D < \frac{50}{3}$:
+Since $d \le 25$, we have $D \le \frac{50}{3}$:
 
 $$\frac{4D + 28n_i}{18 + 7n_i} < 4$$
 
@@ -201,6 +201,7 @@ By Theorem 1:
 $$\frac{\sum (d + \alpha_i)}{\sum \beta_i} < 4$$
 
 In all three scenarios:
+
 $$\frac{\sum a_i}{\sum b_i} < 4$$
 
 Thus:
